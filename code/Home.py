@@ -85,10 +85,10 @@ to_sync_with_url_query = {
     }
 
 
-raw_nwb_folder = 'aind-behavior-data/foraging_nwb_bonsai/'
-cache_folder = 'aind-behavior-data/foraging_nwb_bonsai_processed/'
-# cache_session_level_fig_folder = 'aind-behavior-data/Han/ephys/report/all_sessions/'
-# cache_mouse_level_fig_folder = 'aind-behavior-data/Han/ephys/report/all_subjects/'
+raw_nwb_folder = 'aind-behavior-data-dev/foraging_nwb_bonsai/'
+cache_folder = 'aind-behavior-data-dev/foraging_nwb_bonsai_processed/'
+# cache_session_level_fig_folder = 'aind-behavior-data-dev/Han/ephys/report/all_sessions/'
+# cache_mouse_level_fig_folder = 'aind-behavior-data-dev/Han/ephys/report/all_subjects/'
 
 fs = s3fs.S3FileSystem(anon=False)
 st.session_state.use_s3 = True
@@ -111,13 +111,13 @@ if 'selected_points' not in st.session_state:
     
 
 def _get_urls():
-    cache_folder = 'aind-behavior-data/Han/ephys/report/st_cache/'
-    cache_session_level_fig_folder = 'aind-behavior-data/Han/ephys/report/all_sessions/'
-    cache_mouse_level_fig_folder = 'aind-behavior-data/Han/ephys/report/all_subjects/'
+    cache_folder = 'aind-behavior-data-dev/Han/ephys/report/st_cache/'
+    cache_session_level_fig_folder = 'aind-behavior-data-dev/Han/ephys/report/all_sessions/'
+    cache_mouse_level_fig_folder = 'aind-behavior-data-dev/Han/ephys/report/all_subjects/'
     
     fs = s3fs.S3FileSystem(anon=False)
    
-    with fs.open('aind-behavior-data/Han/streamlit_CO_url.json', 'r') as f:
+    with fs.open('aind-behavior-data-dev/Han/streamlit_CO_url.json', 'r') as f:
         data = json.load(f)
     
     return data['behavior'], data['ephys']
@@ -458,17 +458,17 @@ def init():
     # Init auto training database
     st.session_state.curriculum_manager = CurriculumManager(
         saved_curriculums_on_s3=dict(
-            bucket='aind-behavior-data',
+            bucket='aind-behavior-data-dev',
             root='foraging_auto_training/saved_curriculums/'
         ),
         saved_curriculums_local=os.path.expanduser('~/curriculum_manager/'),
     )
     st.session_state.auto_train_manager = DynamicForagingAutoTrainManager(
         manager_name='447_demo',
-        df_behavior_on_s3=dict(bucket='aind-behavior-data',
+        df_behavior_on_s3=dict(bucket='aind-behavior-data-dev',
                                 root='foraging_nwb_bonsai_processed/',
                                 file_name='df_sessions.pkl'),
-        df_manager_root_on_s3=dict(bucket='aind-behavior-data',
+        df_manager_root_on_s3=dict(bucket='aind-behavior-data-dev',
                                 root='foraging_auto_training/')
     )
     

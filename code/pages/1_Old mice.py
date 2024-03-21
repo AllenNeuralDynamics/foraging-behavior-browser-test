@@ -79,9 +79,9 @@ cache_session_level_fig_folder = 'xxx' #'/root/capsule/data/s3/report/all_units/
 if os.path.exists(cache_folder):
     st.session_state.st.session_state.use_s3 = False
 else:
-    cache_folder = 'aind-behavior-data/Han/ephys/report/st_cache/'
-    cache_session_level_fig_folder = 'aind-behavior-data/Han/ephys/report/all_sessions/'
-    cache_mouse_level_fig_folder = 'aind-behavior-data/Han/ephys/report/all_subjects/'
+    cache_folder = 'aind-behavior-data-dev/Han/ephys/report/st_cache/'
+    cache_session_level_fig_folder = 'aind-behavior-data-dev/Han/ephys/report/all_sessions/'
+    cache_mouse_level_fig_folder = 'aind-behavior-data-dev/Han/ephys/report/all_subjects/'
     
     fs = s3fs.S3FileSystem(anon=False)
     st.session_state.use_s3 = True
@@ -430,10 +430,10 @@ def init():
     # Init auto training database
     st.session_state.auto_train_manager = DynamicForagingAutoTrainManager(
         manager_name='Janelia_demo',
-        df_behavior_on_s3=dict(bucket='aind-behavior-data',
+        df_behavior_on_s3=dict(bucket='aind-behavior-data-dev',
                                 root='Han/ephys/report/all_sessions/export_all_nwb/',
                                 file_name='df_sessions.pkl'),
-        df_manager_root_on_s3=dict(bucket='aind-behavior-data',
+        df_manager_root_on_s3=dict(bucket='aind-behavior-data-dev',
                                 root='foraging_auto_training/')
     )
     

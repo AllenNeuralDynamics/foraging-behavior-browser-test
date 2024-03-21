@@ -7,3 +7,6 @@ curriculum_manager
 
 .streamlit/secrets.toml
 *.pyc
+
+.venv
+venv
